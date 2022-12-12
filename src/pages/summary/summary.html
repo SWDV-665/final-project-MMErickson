@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Summary
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <!-- Provides a basic summary of the estimate -->
+
+  <h6 padding-bottom>Estimate Summary</h6>
+
+  <p>Room Name: {{roomName}}</p>
+  
+  <p>Paint Used: {{paintUsed}}</p>
+  
+  <p>Paint Cost: {{totalPaintCost}}</p>
+
+  <p>Labor Cost: {{totalLaborCost}}<br><br></p>
+  
+  <p padding-bottom>Total Cost: {{totalCost}}</p>
+
+
+  <!-- A form to collect information about the client, in order to send an estimate email. -->
+
+  <h6>Client Contact Information</h6>
+
+  <p>Please fill out the form below if you would like to send this estimate to a potential client:</p>
+
+  <form (ngSubmit)="logForm()">
+
+    <ion-list inset>
+
+      <ion-item>
+        <ion-label stacked>Client First Name: </ion-label>
+        <ion-input type="text" ngDefaultControl [(ngModel)]="email.firstName" name="firstName"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label stacked>Client Last Name: </ion-label>
+        <ion-input type="text" ngDefaultControl [(ngModel)]="email.lastName" name="lastName"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label stacked>Email Address: </ion-label>
+        <ion-input type="email" ngDefaultControl [(ngModel)]="email.emailAddress" name="emailAddress"></ion-input>
+      </ion-item>
+
+      <!-- Displays the for review what the estimate email will look like before it is sent. -->
+
+      <h6>Email Review</h6>
+
+      <p>Below is how your email will look once it is sent. Please review it for correctness before
+      clicking send.<br><br></p>
+
+      <p>Dear (client name will be inserted here),<br><br>
+      Thank you for allowing us the opportunity to bid on your upcoming painting project.<br><br>
+      Here is your estimate: <br><br></p>
+
+      <p>Room Name: {{roomName}}</p>
+      <p>Paint Used: {{paintUsed}}</p>
+      <p>Paint Cost: {{totalPaintCost}}</p>
+      <p>Labor Cost: {{totalLaborCost}}<br><br></p>
+      
+      <p>Total Cost: {{totalCost}}<br><br></p>
+
+      <p>We look forward to hearing from you.</p>
+      <p>Thank you, <br>
+      The Painting Company</p>
+
+      <!-- Button which submits the client information form and sends the estimate
+       to the client with Cordova email plugin -->
+      
+       <button ion-button type="submit" (click)="sendEstimateEmail()" icon-start margin-top>
+      <ion-icon name="ios-mail"></ion-icon>Send Estimate</button>
+
+    </ion-list>
+  
+  </form>
+
+</ion-content>

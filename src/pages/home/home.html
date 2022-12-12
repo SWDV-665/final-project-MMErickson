@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Paint Estimator</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <h5>Welcome to the Paint Estimator!</h5>
+  <p>
+    Please enter the information requested in the form below to create an estimate
+    for painting the walls of a room or area.
+  </p>
+
+<!-- Form inputs -->
+
+  <form (ngSubmit)="logForm()">
+
+    <!-- Form input for room name -->
+
+      <ion-item>
+        <ion-label fixed>Room Name</ion-label>
+        <ion-input type="text" [(ngModel)]="estimate.roomName" name="roomName"></ion-input>
+      </ion-item>
+
+      <!-- Form inputs for room measurments -->
+
+      <ion-item>
+        <ion-label fixed>Wall Height</ion-label>
+          <ion-select [(ngModel)]="estimate.wallHieght" name="wallHieght">
+            <ion-option value="7">7</ion-option>
+            <ion-option value="8">8</ion-option>
+            <ion-option value="9">9</ion-option>
+            <ion-option value="10">10</ion-option>
+            <ion-option value="11">11</ion-option>
+            <ion-option value="12">12</ion-option>
+            <ion-option value="13">13</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="15">15</ion-option>
+            <ion-option value="16">16</ion-option>
+            <ion-option value="17">17</ion-option>
+            <ion-option value="18">18</ion-option>
+            <ion-option value="19">19</ion-option>
+            <ion-option value="20">20</ion-option>
+          </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Room Length</ion-label>
+          <ion-select [(ngModel)]="estimate.roomLength" name="roomLength">
+            <ion-option value="7">7</ion-option>
+            <ion-option value="8">8</ion-option>
+            <ion-option value="9">9</ion-option>
+            <ion-option value="10">10</ion-option>
+            <ion-option value="11">11</ion-option>
+            <ion-option value="12">12</ion-option>
+            <ion-option value="13">13</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="15">15</ion-option>
+            <ion-option value="16">16</ion-option>
+            <ion-option value="17">17</ion-option>
+            <ion-option value="18">18</ion-option>
+            <ion-option value="19">19</ion-option>
+            <ion-option value="20">20</ion-option>
+          </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label fixed>Room Width</ion-label>
+        <ion-select [(ngModel)]="estimate.roomWidth" name="roomWidth">
+          <ion-option value="7">7</ion-option>
+            <ion-option value="8">8</ion-option>
+            <ion-option value="9">9</ion-option>
+            <ion-option value="10">10</ion-option>
+            <ion-option value="11">11</ion-option>
+            <ion-option value="12">12</ion-option>
+            <ion-option value="13">13</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="15">15</ion-option>
+            <ion-option value="16">16</ion-option>
+            <ion-option value="17">17</ion-option>
+            <ion-option value="18">18</ion-option>
+            <ion-option value="19">19</ion-option>
+            <ion-option value="20">20</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Form input for paint selection -->
+
+      <p>Please select from the following drop down list to select a paint for your project:</p>
+
+      <ion-item>
+        <ion-label stacked>Paint Selection:</ion-label>
+        <ion-select [(ngModel)]="estimate.paintUsed" name="paintUsed">
+          <ion-option value="ProMar 200">ProMar 200 at ${{calcProvider.proMarCost}} per gallon</ion-option>
+          <ion-option value="Duration">Duration at ${{calcProvider.durationCost}} per gallon</ion-option>
+          <ion-option value="Emerald">Emerald at ${{calcProvider.emeraldCost}} per gallon</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Form inputs for calculating labor cost -->
+
+      <p>Based on the condition and texture of the walls, please select an approximation
+        of the square feet which can be painted per hour.</p>
+
+      <ion-item>
+        <ion-label stacked>Square Feet Per Hour: </ion-label>
+        <ion-select [(ngModel)]="estimate.sqFtPerHr" name="sqFtPerHr">
+          <ion-option value="100">100 sq. ft. per hr.</ion-option>
+          <ion-option value="150">150 sq. ft. per hr.</ion-option>
+          <ion-option value="200">200 sq. ft. per hr.</ion-option>
+          <ion-option value="250">250 sq. ft. per hr.</ion-option>
+          <ion-option value="300">300 sq. ft. per hr.</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <p>Please enter the labor and overhead cost per hour.</p>
+
+      <ion-item>
+        <ion-label stacked>Labor and Overhead Per Hour: </ion-label>
+        <ion-select [(ngModel)]="estimate.laborPerHr" name="laborPerHr">
+          <ion-option value="25">$ 25 per hr.</ion-option>
+          <ion-option value="30">$ 30 per hr.</ion-option>
+          <ion-option value="35">$ 35 per hr.</ion-option>
+          <ion-option value="40">$ 40 per hr.</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Cordova plug-in input for adding photos to the estimate summary -->
+
+      <p>If you would like to add a photo of the area to include with the summary of your estimate,
+        please click the camera icon below.</p>
+
+      <!-- Camera icon button to add a photo -->
+
+      <button ion-button (click)="takePhoto()" icon-only>
+        <ion-icon name="ios-camera"></ion-icon>
+      </button>
+
+      <!-- Submit button for the form -->
+
+      <p>After you have made and reviewed your selections, please click the create estimate
+        buttom to continue.</p>
+
+      <!-- A button which submits the form inputs necessary to complete the estimate,
+      and brings the user to the summary page. -->
+
+      <button ion-button type="submit" (click)="goToSummary()" margin-top>Create Estimate</button>
+
+    </form>
+ 
+</ion-content>
